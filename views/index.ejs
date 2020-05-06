@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            Form Database
+        </title>
+    </head>
+    <body>
+        <% if(success != '') { %>
+            <div class="success">
+                <h1>
+                    Success
+                </h1>
+                <p>
+                    <%= success %>
+                </p>
+            </div>
+            <% } %>
+        <div class="login-box">
+            <h1>
+                Register
+            </h1>
+            <div class="textbox">
+                <form method="POST" action="/send">
+                    <input type="text" name="place" required placeholder="place">
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

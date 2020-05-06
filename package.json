@@ -1,7 +1,6 @@
 {
-  "name": "LetsGo",
+  "name": "letsgo",
   "version": "1.0.0",
-  "description": "",
   "main": "countries.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,10 +9,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.2",
+    "express": "^4.16.4",
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.12",
     "os": "^0.1.1",
     "request": "^2.88.2",
     "validator": "^13.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technisRahulk/Safar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/technisRahulk/Safar/issues"
+  },
+  "homepage": "https://github.com/technisRahulk/Safar#readme",
+  "description": ""
 }
