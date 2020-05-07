@@ -31,7 +31,7 @@ app.post('/send', (req, res) => {
           }
           console.log(loc.place)
         })
-        res.render('index', {success: 'Record Inserted Successfully'})
+        res.render('index', {success: 'Record Inserted Successfully',Places:'Here are the countries'})
         // db.collection('locations').findOne({place:req.body.place},(error,loc)=>{
         //   if(error){
         //     return console.log(error)
@@ -67,7 +67,7 @@ app.post('/send', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.render('index', { layout:false, success: ''});
+    res.render('index', { layout:false,success: '',Places:''});
   });
 
 app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));

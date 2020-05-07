@@ -8,31 +8,36 @@
         <link rel="stylesheet" type="text/css" href="css\style.css">
     </head>
     <body>
-        <% if(success != '') { %>
-            <div class="success">
-                <h1>
-                    Success
-                </h1>
-                <p>
-                    <%= success %>
-                </p>
-            </div>
-            <% } %>
         <div class="login-box">
             <h1>
                 REGISTER
             </h1>
             <div class="textbox1">
-                <form method="POST" action="/send">
-                    <!--<input type="text" name="place" required placeholder="place">
-                    <input type="submit" value="Submit">-->
+                <form  method="POST" action="/send">
+                    <input  id="form" type="text" name="place" required placeholder="place">
+                    <input type="submit" value="Submit"><br>
+                </form>
+                    <h3>Which kind of Destination??</h3>
                     <button class="abc" >Rainy</button><br>
                     <button class="abc">Cold</button><br>
                     <button class="abc">Warm</button>
-                </form>
             </div>
+            <% if(success != '') { %>
+                <div class="success">
+                    <h1>
+                        Success
+                    </h1>
+                    <p>
+                        <%= success %>
+                    </p>
+                </div>
+                <% } %>
             <div id="response">
-                <p id="list"></p>
+                <% if(Places != '') { %>
+                    <h1>Favourable Destinations</h1>
+                    <p><%= Places %></p>
+
+                <% } %>
             </div>
         </div>
     </body>
