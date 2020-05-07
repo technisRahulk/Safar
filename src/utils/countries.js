@@ -1,7 +1,7 @@
 const {MongoClient,ObjectID}=require('mongodb')
-const destination=require('./model')
-const geocode=require('./utils/geocode')
-const forecast=require('./utils/forecast')
+const destination=require('model')
+const geocode=require('geocode')
+const forecast=require('forecast')
 
 const connectURL='mongodb://127.0.0.1:27017'
 const dbname='safar-api'

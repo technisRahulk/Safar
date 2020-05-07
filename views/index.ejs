@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8"> 
         <title>
             Form Database
         </title>
+        <link rel="stylesheet" type="text/css" href="css\style.css">
     </head>
     <body>
         <% if(success != '') { %>
@@ -19,13 +20,19 @@
             <% } %>
         <div class="login-box">
             <h1>
-                Register
+                REGISTER
             </h1>
-            <div class="textbox">
+            <div class="textbox1">
                 <form method="POST" action="/send">
-                    <input type="text" name="place" required placeholder="place">
-                    <input type="submit" value="Submit">
+                    <!--<input type="text" name="place" required placeholder="place">
+                    <input type="submit" value="Submit">-->
+                    <button class="abc" >Rainy</button><br>
+                    <button class="abc">Cold</button><br>
+                    <button class="abc">Warm</button>
                 </form>
+            </div>
+            <div id="response">
+                <p id="list"></p>
             </div>
         </div>
     </body>

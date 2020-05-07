@@ -1,8 +1,9 @@
+
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const {MongoClient,ObjectID}=require('mongodb')
-const destination=require('./model')
+const destination=require('./utils/model')
 const geocode=require('./utils/geocode')
 const forecast=require('./utils/forecast')
 
@@ -10,12 +11,13 @@ const connectURL='mongodb://127.0.0.1:27017'
 const dbname='safar-api'
 
 const app = express()
-
-app.set('views', path.join(__dirname, './views'));
+const publicDir=path.join(__dirname,'./../public')
+app.set('views', path.join(__dirname, './../views'));
 app.set('view engine', 'ejs');
 
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.static(publicDir))
 
 app.post('/send', (req, res) => {
     MongoClient.connect(connectURL,{useNewUrlParser:true},(error,client)=>{
@@ -68,5 +70,4 @@ app.get('/', (req, res) => {
     res.render('index', { layout:false, success: ''});
   });
 
-  app.listen(process.env.PORT || 3000, 
-	() => console.log("Server is running..."));
+app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
