@@ -23,44 +23,44 @@ app.post('/send', (req, res) => {
             return console.log('error')
         }
         const db=client.db(dbname)
-        // db.collection('locations').insertOne({place: req.body.place}, (error, loc) => {
-        //   if(error){
-        //     return console.log(error)
-        //   }
-        //   console.log(loc.place)
-        // })
-        // res.render('index', {success: 'Record Inserted Successfully'})
-        db.collection('locations').findOne({place:req.body.place},(error,loc)=>{
+        db.collection('locations').insertOne({place: req.body.place}, (error, loc) => {
           if(error){
             return console.log(error)
           }
           console.log(loc.place)
-          
-          geocode(loc.place,(error,{location,latitude,longitude}={})=>{ 
-            if(error){
-                return console.log(error)
-            }
-            
-            forecast(latitude,longitude,(error,forecastData)=>{
-                if(error){
-                    return console.log(error)
-                 }
-                
-                const entry=new destination({
-                  place:loc.place,
-                  precipitation:forecastData.precipitation,
-                  temperature:forecastData.temp
-                })
-                
-                entry.save().then(()=>{
-                  console.log('Destination added succesfully')
-                }).catch((error)=>{
-                  console.log(error)
-                })
-            })
-          })
         })
         res.render('index', {success: 'Record Inserted Successfully'})
+        // db.collection('locations').findOne({place:req.body.place},(error,loc)=>{
+        //   if(error){
+        //     return console.log(error)
+        //   }
+        //   console.log(loc.place)
+          
+        //   geocode(loc.place,(error,{location,latitude,longitude}={})=>{ 
+        //     if(error){
+        //         return console.log(error)
+        //     }
+            
+        //     forecast(latitude,longitude,(error,forecastData)=>{
+        //         if(error){
+        //             return console.log(error)
+        //          }
+                
+        //         const entry=new destination({
+        //           place:loc.place,
+        //           precipitation:forecastData.precipitation,
+        //           temperature:forecastData.temp
+        //         })
+                
+        //         entry.save().then(()=>{
+        //           console.log('Destination added succesfully')
+        //         }).catch((error)=>{
+        //           console.log(error)
+        //         })
+        //     })
+        //   })
+        // })
+        // res.render('index', {success: 'Record Inserted Successfully'})
       })
 })
 
