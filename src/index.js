@@ -19,51 +19,52 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(publicDir))
 
-app.post('/send', (req, res) => {
+app.post('/', (req, res) => {
+    // MongoClient.connect(connectURL,{useNewUrlParser:true},(error,client)=>{
+    //     if(error){
+    //         return console.log('error')
+    //     }
+    //     const db=client.db(dbname)
+    //     db.collection('locations').insertOne({place:req.body.place}, (error, loc) => {
+    //       if(error){
+    //         return console.log(error)
+    //       }
+    //       console.log(loc.place)
+    //     })
+    //     res.render('index', {success: 'Record Inserted Successfully',Places:'Here are the countries'})
+    //   })
     MongoClient.connect(connectURL,{useNewUrlParser:true},(error,client)=>{
-        if(error){
-            return console.log('error')
-        }
-        const db=client.db(dbname)
-        db.collection('locations').insertOne({place: req.body.place}, (error, loc) => {
-          if(error){
-            return console.log(error)
-          }
-          console.log(loc.place)
-        })
-        res.render('index', {success: 'Record Inserted Successfully',Places:'Here are the countries'})
-        // db.collection('locations').findOne({place:req.body.place},(error,loc)=>{
-        //   if(error){
-        //     return console.log(error)
-        //   }
-        //   console.log(loc.place)
-          
-        //   geocode(loc.place,(error,{location,latitude,longitude}={})=>{ 
-        //     if(error){
-        //         return console.log(error)
-        //     }
+      if(error){
+          return console.log('error')
+      }
+      const db=client.db(dbname)
+      setInterval(()=>{
+        db.collection('locations').find().forEach(function(loc){
+          var place_id = loc._id
+          var place_name = loc.place
+          geocode(loc.place,(error,{loc,latitude,longitude}={})=>{ 
+            if(error){
+              return console.log(error)
+            }
             
-        //     forecast(latitude,longitude,(error,forecastData)=>{
-        //         if(error){
-        //             return console.log(error)
-        //          }
-                
-        //         const entry=new destination({
-        //           place:loc.place,
-        //           precipitation:forecastData.precipitation,
-        //           temperature:forecastData.temp
-        //         })
-                
-        //         entry.save().then(()=>{
-        //           console.log('Destination added succesfully')
-        //         }).catch((error)=>{
-        //           console.log(error)
-        //         })
-        //     })
-        //   })
-        // })
-        // res.render('index', {success: 'Record Inserted Successfully'})
-      })
+            forecast(latitude,longitude,(error,forecastData)=>{
+              if(error){
+                return console.log(error)
+              }
+              db.collection('locations').update({
+                _id: place_id
+              }, {
+                place: place_name,
+                temperature: forecastData.temp,
+                precipitation: forecastData.precipitation
+              })
+            })
+          })
+        })
+      },7000)
+    
+    })
+    
 })
 
 app.get('/', (req, res) => {
