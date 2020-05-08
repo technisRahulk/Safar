@@ -38,7 +38,7 @@ app.post('/', (req, res) => {
           return console.log('error')
       }
       const db=client.db(dbname)
-      setInterval(()=>{
+     // setInterval(()=>{
         db.collection('locations').find().forEach(function(loc){
           var place_id = loc._id
           var place_name = loc.place
@@ -61,12 +61,13 @@ app.post('/', (req, res) => {
             })
           })
         })
-      },7000)
+     // },7000)
+
+
     
     })
     
 })
-
 app.get('/', (req, res) => {
     res.render('index', { layout:false,success: '',Places:''});
   });
