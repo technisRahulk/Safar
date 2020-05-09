@@ -34,7 +34,7 @@
             <form action="/warm">
                 <input type="submit" value="warm" placeholder="warm">
             </form>
-            <% if(success != '') { %>
+            {{!-- <% if(success != '') { %>
                 <div class="success">
                     <h1>
                         Success
@@ -46,11 +46,17 @@
                 <% } %>
             <div id="response">
                 <% if(Places != '') { %>
-                    <h1>Favourable Destinations</h1>
-                    <p><%= Places %></p>
-
+                    <h1>
+                        Places
+                    </h1>
+                    <p>
+                        <%= Places %>
+                    </p>
                 <% } %>
-            </div>
+            </div> --}}
+            {{success}}
+            {{Places}}
+            {{error}}
         </div>
         
     </body>
