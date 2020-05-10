@@ -2,6 +2,7 @@ const {MongoClient,ObjectID}=require('mongodb')
 const destination=require('./model')
 const geocode=require('./geocode')
 const forecast=require('./forecast')
+const cities=require('all-the-cities')
 
 const connectURL='mongodb://127.0.0.1:27017'
 const dbname='safar-api'
@@ -66,6 +67,12 @@ const dbname='safar-api'
     db.collection('locations').find().forEach(function(loc){
       var place_id = loc._id
       var place_name = loc.place
+      var population=0
+      const city=cities.find((city)=>city.name==loc.place)
+      if(city){
+        population=city.population
+        console.log(city.name,population)
+      }
       geocode(loc.place,(error,{loc,latitude,longitude}={})=>{ 
         if(error){
           return console.log(error)
@@ -80,7 +87,8 @@ const dbname='safar-api'
           }, {
             place: place_name,
             temperature: forecastData.temp,
-            precipitation: forecastData.precipitation
+            precipitation: forecastData.precipitation,
+            population:population
           })
         })
       })
