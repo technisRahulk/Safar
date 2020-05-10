@@ -5,62 +5,80 @@
         <title>
             Form Database
         </title>
+        <link rel="stylesheet" type="text/css" href="css\bootstrap-dark.min.css">
         <link rel="stylesheet" type="text/css" href="css\style.css">
     </head>
     <body>
-        <div class="login-box">
-            <h1>
+        <div class="login-box container">
+            {{!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 SAFAR
-            </h1>
-            <form action="/update">
-                <input type="submit" value="update" placeholder="Update">
-            </form>
-            <div class="textbox1">
-               <!-- <form  method="POST" action="/send">
-                    <input  id="form" type="text" name="place" required placeholder="place">
-                    <input type="submit" value="Submit"><br>
-                </form>-->
-                    <h3>Which kind of Destination??</h3>
-                    <!-- <button id="rainy" class="abc" >Rainy</button><br>
-                    <button id="cold" class="abc">Cold</button><br>
-                    <button id="warm" class="abc">Warm</button> -->
-            </div>
-            <form action="/rainy">
-                <input type="submit" value="rainy" placeholder="rainy">
-            </form>
-            <form action="/cold">
-                <input type="submit" value="cold" placeholder="cold">
-            </form>
-            <form action="/warm">
-                <input type="submit" value="warm" placeholder="warm">
-            </form>
-            {{!-- <% if(success != '') { %>
-                <div class="success">
-                    <h1>
-                        Success
-                    </h1>
-                    <p>
-                        <%= success %>
-                    </p>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </div>
-                <% } %>
-            <div id="response">
-                <% if(Places != '') { %>
-                    <h1>
-                        Places
-                    </h1>
-                    <p>
-                        <%= Places %>
-                    </p>
-                <% } %>
-            </div> --}}
-            {{success}}
-            <div>
-                <ul>
-                    {{Places}}
+            </nav> --}}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#"><h1 style="padding-left: 20px;">SAFAR</h1></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"> <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <form action="/update">
+                            <input type="submit" value="Update" placeholder="Update" class="btn btn-success">
+                        </form>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"></a>
+                </li>
                 </ul>
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
             </div>
-            
+            </nav>
+
+
+            {{!-- <form action="/update">
+                <input type="submit" value="update" placeholder="Update">
+            </form> --}}
+            <div class="jumbotron">
+                <div class="textbox1">
+                    <h3>Which kind of Destination??</h3>
+                </div>
+                <form action="/rainy">
+                    <input type="submit" value="RAINY" placeholder="RAINY" class="btn btn-info btn-lg btn-block place-btn">
+                </form>
+                <form action="/cold">
+                    <input type="submit" value="COLD" placeholder="COLD" class="btn btn-primary btn-lg btn-block place-btn">
+                </form>
+                <form action="/warm">
+                    <input type="submit" value="WARM" placeholder="WARM" class="btn btn-warning btn-lg btn-block place-btn">
+                </form>
+            </div>
+
+            <div class="alert alert-dismissible alert-success">
+                {{success}}
+            </div>
+            <br>
+            <ul class="list-group">
+                {{#each Places}}
+                <li class="list-group-item d-flex justify-content-between align-items-center">{{this}}</li>
+                {{/each}}
+            </ul>
             {{error}}
         </div>
         

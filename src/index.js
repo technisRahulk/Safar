@@ -1,5 +1,6 @@
 
 const express = require('express')
+const cities=require('all-the-cities')
 const path = require('path')
 const hbs=require('hbs')
 const bodyParser = require('body-parser')
@@ -15,7 +16,6 @@ const app = express()
 const publicDir=path.join(__dirname,'./../public')
 app.set('views', path.join(__dirname, './../views'));
 app.set('view engine', 'hbs');
-
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(publicDir))
@@ -29,6 +29,11 @@ app.get('/update', (req, res) => {
       db.collection('locations').find().forEach(function(loc){
         var place_id = loc._id
         var place_name = loc.place
+        var population=0
+        const city=cities.find((city)=>city.name==loc.place)
+        if(city){
+          population=city.population
+        }
         geocode(loc.place,(error,{loc,latitude,longitude}={})=>{ 
           if(error){
             return res.send({error})
@@ -43,7 +48,8 @@ app.get('/update', (req, res) => {
             }, {
               place: place_name,
               temperature: forecastData.temp,
-              precipitation: forecastData.precipitation
+              precipitation: forecastData.precipitation,
+              population:population
             })
           })
         })
@@ -59,19 +65,15 @@ app.get('/rainy', (req, res) => {
     const db=client.db(dbname)
     var toGo2=[]
     db.collection('locations').find().forEach((loc)=>{
-      if(loc.precipitation>0.20){
+      if(loc.precipitation>0){
           toGo2.push(loc.place)
       }
   
     }).then(()=>{
-     // var iterator = toGo2.values();
-     // for (let elements of iterator) { 
-     //   console.log(elements);
-     // }
      if(toGo2.length==0){
-      res.render('index', {success: `Rainy places:`,Places:`No such destinations`})
+      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:`No such destinations`})
      } else {
-      res.render('index', {success: `Rainy places:`,Places:toGo2})
+      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2})
      }
     })
     
@@ -92,9 +94,9 @@ app.get('/warm', (req, res) => {
      }
     }).then(()=>{
       if(toGo.length==0){
-        res.render('index', {success: `Warm places:`,Places:`No such destinations`})
+        res.render('index', {success: `Here are the Warm Places you would love to visit!`,Places:`No such destinations`})
       } else {
-        res.render('index', {success: `Warm places:`,Places:toGo})
+        res.render('index', {success: `Here are the Warm Places you would love to visit!`,Places:toGo})
       }
     })
     
@@ -116,14 +118,15 @@ app.get('/cold', (req, res) => {
 
     }).then(()=>{
       if(toGo1.length==0){
-        res.render('index', {success: `Cold places:`,Places:`No such destinations`})
+        res.render('index', {success: `Here are the Cold Places you would love to visit!`,Places:`No such destinations`})
       } else {
-        res.render('index', {success: `Cold places:`,Places:toGo1})
+        res.render('index', {success: `Here are the Cold Places you would love to visit!`,Places:toGo1})
       }
     })
     
   })
 })
+
 app.get('/', (req, res) => {
     res.render('index', { layout:false,success: ``,Places:``,error:``});
   });
