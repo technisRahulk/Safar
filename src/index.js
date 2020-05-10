@@ -66,7 +66,14 @@ app.get('/rainy', (req, res) => {
     var toGo2=[]
     db.collection('locations').find().forEach((loc)=>{
       if(loc.precipitation>0){
-          toGo2.push(loc.place)
+        var map = 'http://maps.google.com/?q='+loc.place
+        var m = {
+          place: loc.place,
+          precipitation: loc.precipitation,
+          temp: loc.temperature,
+          maplink: map
+        }
+        toGo2.push(m)
       }
   
     }).then(()=>{
@@ -90,7 +97,15 @@ app.get('/warm', (req, res) => {
     //for warm places
     db.collection('locations').find().forEach((loc)=>{
      if(loc.temperature>25){
-        toGo.push(loc.place)
+       var map = 'http://maps.google.com/?q='+loc.place
+      //  console.log(map)
+       var m = {
+         place: loc.place,
+         precipitation: loc.precipitation,
+         temp: loc.temperature,
+         maplink: map
+       }
+        toGo.push(m)
      }
     }).then(()=>{
       if(toGo.length==0){
@@ -113,7 +128,14 @@ app.get('/cold', (req, res) => {
     var toGo1=[]
     db.collection('locations').find().forEach((loc)=>{
       if(loc.temperature<25){
-          toGo1.push(loc.place)
+        var map = 'http://maps.google.com/?q='+loc.place
+        var m = {
+          place: loc.place,
+          precipitation: loc.precipitation,
+          temp: loc.temperature,
+          maplink: map
+        }
+        toGo1.push(m)
       }
 
     }).then(()=>{

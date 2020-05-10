@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8"> 
         <title>
-            Form Database
+            Safar
         </title>
         <link rel="stylesheet" type="text/css" href="css\bootstrap-dark.min.css">
         <link rel="stylesheet" type="text/css" href="css\style.css">
@@ -76,7 +76,12 @@
             <br>
             <ul class="list-group">
                 {{#each Places}}
-                <li class="list-group-item d-flex justify-content-between align-items-center">{{this}}</li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Location: {{this.place}} <br>
+                    Temperature: {{this.temp}} <br>
+                    Precipitation: {{this.precipitation}} <br>
+                    <a href="{{this.maplink}}" target="_blank">Go To Map</a>
+                </li>
                 {{/each}}
             </ul>
             {{error}}
