@@ -69,10 +69,12 @@ app.get('/rainy', (req, res) => {
      //   console.log(elements);
      // }
      if(toGo2.length==0){
-      return res.render('index', {success: `Rainy places:`,Places:`No such destinations`})
+      res.render('index', {success: `Rainy places:`,Places:`No such destinations`})
+     } else {
+      res.render('index', {success: `Rainy places:`,Places:toGo2})
      }
     })
-    res.render('index', {success: `Rainy places:`,Places:toGo2})
+    
   })
 })
 
@@ -85,15 +87,17 @@ app.get('/warm', (req, res) => {
     var toGo=[]
     //for warm places
     db.collection('locations').find().forEach((loc)=>{
-     if(loc.temperature>35){
+     if(loc.temperature>25){
         toGo.push(loc.place)
      }
     }).then(()=>{
       if(toGo.length==0){
-      return  res.render('index.hbs', {success: `Warm places:`,Places:`No such destinations`})  
-      }      
+        res.render('index', {success: `Warm places:`,Places:`No such destinations`})
+      } else {
+        res.render('index', {success: `Warm places:`,Places:toGo})
+      }
     })
-    res.render('index', {success: `Warm places:`,Places:toGo})
+    
   })
 })
 
@@ -106,16 +110,18 @@ app.get('/cold', (req, res) => {
     //for cold places
     var toGo1=[]
     db.collection('locations').find().forEach((loc)=>{
-      if(loc.temperature<18){
+      if(loc.temperature<25){
           toGo1.push(loc.place)
       }
 
     }).then(()=>{
       if(toGo1.length==0){
-        return res.render('index', {success: `Cold places:`,Places:'No such destinations'})
+        res.render('index', {success: `Cold places:`,Places:`No such destinations`})
+      } else {
+        res.render('index', {success: `Cold places:`,Places:toGo1})
       }
     })
-    res.render('index', {success: `Cold places:`,Places:toGo1})
+    
   })
 })
 app.get('/', (req, res) => {
