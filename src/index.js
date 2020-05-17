@@ -17,6 +17,7 @@ const publicDir=path.join(__dirname,'./../public')
 app.set('views', path.join(__dirname, './../views'));
 app.set('view engine', 'hbs');
 app.use(express.json())
+app.use(express.urlencoded())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(publicDir))
 
@@ -148,6 +149,10 @@ app.get('/cold', (req, res) => {
     
   })
 })
+
+// app.post('/search', (req, res) => {
+//   console.log(req.body.age)
+// })
 
 app.get('/', (req, res) => {
     res.render('index', { layout:false,success: ``,Places:``,error:``});
