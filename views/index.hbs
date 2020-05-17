@@ -44,17 +44,12 @@
                     <a class="nav-link" href="#"></a>
                 </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                <form name="form1" method="post" action="/search" class="form-inline my-2 my-lg-0" onsubmit="required()">
+                <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" name="name">
+                <button class="btn btn-secondary my-2 my-sm-0" id="submit" type="submit">Search</button>
                 </form>
             </div>
             </nav>
-
-
-            {{!-- <form action="/update">
-                <input type="submit" value="update" placeholder="Update">
-            </form> --}}
             <div class="jumbotron">
                 <div class="textbox1">
                     <h3>Which kind of Destination??</h3>
@@ -83,10 +78,33 @@
                     <a href="{{this.maplink}}" target="_blank">Go To Map</a>
                 </li>
                 {{/each}}
+                    <div class="alert alert-dismissible alert-warning" id="myModal">
+                    <span class="close">&times;</span>
+                <h4 class="alert-heading">Warning!</h4>
+                <p class="mb-0">{{error}}</p>
+                </div>
             </ul>
-            {{error}}
         </div>
-        
+        <script>
+            var modal = document.getElementById("myModal");
+            var span = document.getElementsByClassName("close")[0]; 
+            function required()
+            {
+                var empt = document.forms["form1"]["name"].value;
+                if (empt == "")
+                 modal.style.display = "block";
+
+                span.onclick = function() {
+                   modal.style.display = "none";
+                }
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            }  
+        </script>
+
     </body>
 
 </html>

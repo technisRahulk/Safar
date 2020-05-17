@@ -148,9 +148,45 @@ app.get('/cold', (req, res) => {
     
   })
 })
-
+app.post('/search',(req,res)=>{
+  var address=req.body.name
+  if(!address){
+    return res.render('index',{success:``,Places:``,error:`Address field required`})
+  }
+  var toGo3=[]
+  geocode(address,(error,{location,latitude,longitude}={})=>{ 
+      if(error){
+          return res.send({error})
+      }
+      forecast(latitude,longitude,(error,forecastData)=>{
+          if(error){
+              return res.send({error})
+           }
+          var map = 'http://maps.google.com/?q='+address
+          var m = {
+            place:address,
+            precipitation:forecastData.precipitation,
+            temp: forecastData.temp,
+            maplink: map
+          }
+          toGo3.push(m)
+          if(toGo3.length==0){
+            res.render('index', {success: ``,Places:`No such destinations`})
+           } else {
+            res.render('index', {success: `Here is the Place you would love to visit!!`,Places:toGo3})
+           }
+      })
+  })
+})
 app.get('/', (req, res) => {
     res.render('index', { layout:false,success: ``,Places:``,error:``});
-  });
+});
+
+app.get('*',(req,res)=>{
+  res.send({
+      title:'404',
+    error:'Error 404:Page not found'
+  })
+})
 
 app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
