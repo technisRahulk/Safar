@@ -13,3 +13,11 @@
     font-size: 25px;
     text-align: center;
 }
+#myModal{
+    display:none;
+    background-color: red;
+    position: absolute;
+    top: 50vh;
+    height: 30%;
+    width: 90%;
+}

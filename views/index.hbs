@@ -6,6 +6,7 @@
             Safar
         </title>
         <link rel="stylesheet" type="text/css" href="css\bootstrap-dark.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
         <link rel="stylesheet" type="text/css" href="css\style.css">
     </head>
     <body>
@@ -44,30 +45,54 @@
                     <a class="nav-link" href="#"></a>
                 </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                <form name="form1" method="post" action="/search" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" name="name" required>
+                <button class="btn btn-secondary my-2 my-sm-0" id="submit" type="submit">Search</button>
                 </form>
             </div>
             </nav>
-
-
-            {{!-- <form action="/update">
-                <input type="submit" value="update" placeholder="Update">
-            </form> --}}
             <div class="jumbotron">
                 <div class="textbox1">
                     <h3>Which kind of Destination??</h3>
                 </div>
-                <form action="/rainy">
-                    <input type="submit" value="RAINY" placeholder="RAINY" class="btn btn-info btn-lg btn-block place-btn">
-                </form>
-                <form action="/cold">
-                    <input type="submit" value="COLD" placeholder="COLD" class="btn btn-primary btn-lg btn-block place-btn">
-                </form>
-                <form action="/warm">
-                    <input type="submit" value="WARM" placeholder="WARM" class="btn btn-warning btn-lg btn-block place-btn">
-                </form>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                            <div class="card-body">
+                                <h4 class="card-title" style="text-align: center; font-size: 200px;"><i class="fas fa-cloud-sun-rain"></i></h4>
+                            </div>
+                            <div class="card-header">
+                                <form action="/rainy">
+                                    <input type="submit" value="RAINY" placeholder="RAINY" class="btn btn-info btn-lg btn-block place-btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                            <div class="card-body">
+                                <h4 class="card-title" style="text-align: center; font-size: 200px;"><i class="fas fa-snowflake"></i></h4>
+                            </div>
+                            <div class="card-header">
+                                <form action="/cold">
+                                    <input type="submit" value="COLD" placeholder="COLD" class="btn btn-primary btn-lg btn-block place-btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+                            <div class="card-body">
+                                <h4 class="card-title" style="text-align: center; font-size: 200px;"><i class="fas fa-sun"></i></h4>
+                            </div>
+                            <div class="card-header">
+                                <form action="/warm">
+                                    <input type="submit" value="WARM" placeholder="WARM" class="btn btn-warning btn-lg btn-block place-btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {{!-- <form method="POST" action="/search">
                     <input type="text" placeholder="name" name="name">
                     <input type="number" placeholder="age" name="age">
@@ -88,10 +113,33 @@
                     <a href="{{this.maplink}}" target="_blank">Go To Map</a>
                 </li>
                 {{/each}}
+                    <div class="alert alert-dismissible alert-warning" id="myModal">
+                    <span class="close">&times;</span>
+                <h4 class="alert-heading">Warning!</h4>
+                <p class="mb-0">{{error}}</p>
+                </div>
             </ul>
-            {{error}}
         </div>
-        
+        <script>
+            var modal = document.getElementById("myModal");
+            var span = document.getElementsByClassName("close")[0]; 
+            function required()
+            {
+                var empt = document.forms["form1"]["name"].value;
+                if (empt == "")
+                 modal.style.display = "block";
+
+                span.onclick = function() {
+                   modal.style.display = "none";
+                }
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            }  
+        </script>
+
     </body>
 
 </html>
