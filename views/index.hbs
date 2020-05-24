@@ -5,9 +5,20 @@
         <title>
             Safar
         </title>
+        <style>
+        #map {
+        height: 50%;
+        }
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+        </style>
         <link rel="stylesheet" type="text/css" href="css\bootstrap-dark.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
         <link rel="stylesheet" type="text/css" href="css\style.css">
+
     </head>
     <body>
         <div class="login-box container">
@@ -102,10 +113,8 @@
                 <p>{{error}}</p>
             </ul>
         </div>
-        {{!-- For Rendering Map --}}
-        <div class="map">
-
-        </div>
+         {{!-- For Rendering Map --}}
+        <div id="map"></div>
         <hr>
         <footer class="page-footer font-small unique-color-dark">
 
@@ -152,6 +161,12 @@
         </div>
 
         </footer>
+
+        <script src="js\script.js" ></script>
+        <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpNIAovfwk8ku78E7bKGA5XlLPlKdaJfI&callback=initMap">
+        </script>
+        
     </body>
 
 </html>
