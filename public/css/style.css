@@ -37,3 +37,7 @@ hr {
     padding: 7px;
     color: black;
 }
+#map {
+    width: 80%;
+    margin: auto;
+}
