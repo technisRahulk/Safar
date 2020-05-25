@@ -4,6 +4,7 @@
   "main": "countries.js",
   "scripts": {
     "start": "node src/index.js",
+    "database":"G:/mongodb/bin/mongod.exe --dbpath=G:/mongodb-data",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

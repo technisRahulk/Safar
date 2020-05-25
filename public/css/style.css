@@ -1,3 +1,14 @@
+#map {
+    left:10%;
+    border-radius: 1%;
+    height: 70%;
+    width: 80%;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 .textbox1 {
     text-align: center;
     padding-bottom: 20px;
