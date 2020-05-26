@@ -77,12 +77,12 @@ app.get('/rainy', (req, res) => {
           precipitation: loc.precipitation,
           temp: loc.temperature,
           maplink: map,
-          lat:loc.latitude,
-          lng:loc.longitude
+          lat:loc.longitude,
+          lng:loc.latitude
         }
         var l={
-          lat:loc.latitude,
-          lng:loc.longitude
+          lat:loc.longitude,
+          lng:loc.latitude
         }
         toGo2.push(m)
         coor2.push(l)//pushing coordinates to the array
@@ -92,7 +92,7 @@ app.get('/rainy', (req, res) => {
      if(toGo2.length==0){
       res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:`No such destinations`})
      } else {
-      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2,"coor2":jsonUtils.encodeJSON(coor2) })//added coor2 array to store coordinates
+      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2,"coor":jsonUtils.encodeJSON(coor2) })//added coor2 array to store coordinates
      }
     })
     
@@ -106,7 +106,7 @@ app.get('/warm',(req, res) => {
     }
     const db=client.db(dbname)
     var toGo=[]
-    var coor=[]
+    var coor3=[]
     //for warm places
     db.collection('locations').find().forEach((loc)=>{
      if(loc.temperature>25){
@@ -116,15 +116,22 @@ app.get('/warm',(req, res) => {
          place: loc.place,
          precipitation: loc.precipitation,
          temp: loc.temperature,
-         maplink: map
+         maplink: map,
+         lat:loc.longitude,
+         lng:loc.latitude
        }
+       var l={
+        lat:loc.longitude,
+        lng:loc.latitude
+      }
         toGo.push(m)
+        coor3.push(l)
      }
     }).then(()=>{
       if(toGo.length==0){
         res.render('index', {success: `Here are the Warm Places you would love to visit!`,Places:`No such destinations`})
       } else {
-        res.render('index', {success: `Here are the Warm Places you would love to visit!`,Places:toGo})
+        res.render('index', {success: `Here are the Warm Places you would love to visit!`,Places:toGo,"coor":jsonUtils.encodeJSON(coor3)})
       }
     })
     
@@ -147,16 +154,23 @@ app.get('/cold', (req, res) => {
           place: loc.place,
           precipitation: loc.precipitation,
           temp: loc.temperature,
-          maplink: map
+          maplink: map,
+          lat:loc.longitude,
+          lng:loc.latitude
+        }
+        var l={
+          lat:loc.longitude,
+          lng:loc.latitude
         }
         toGo1.push(m)
+        coor1.push(l)
       }
 
     }).then(()=>{
       if(toGo1.length==0){
         res.render('index', {success: `Here are the Cold Places you would love to visit!`,Places:`No such destinations`})
       } else {
-        res.render('index', {success: `Here are the Cold Places you would love to visit!`,Places:toGo1})
+        res.render('index', {success: `Here are the Cold Places you would love to visit!`,Places:toGo1,"coor":jsonUtils.encodeJSON(coor1)})
       }
     })
     
@@ -173,6 +187,7 @@ app.post('/search',(req,res)=>{
     return res.render('index',{success:``,Places:``,error:`Address field required`})
   }
   var toGo3=[]
+  var coor3=[]
   geocode(address,(error,{location,latitude,longitude}={})=>{ 
       if(error){
           return res.send({error})
@@ -186,13 +201,20 @@ app.post('/search',(req,res)=>{
             place:address,
             precipitation:forecastData.precipitation,
             temp: forecastData.temp,
-            maplink: map
+            maplink: map,
+            lat:longitude,
+            lng:latitude
+          }
+          var l={
+            lat:longitude,
+            lng:latitude
           }
           toGo3.push(m)
+          coor3.push(l)
           if(toGo3.length==0){
             res.render('index', {success: ``,Places:`No such destinations`})
            } else {
-            res.render('index', {success: `Here is the Place you would love to visit!!`,Places:toGo3})
+            res.render('index', {success: `Here is the Place you would love to visit!!`,Places:toGo3,"coor":jsonUtils.encodeJSON(coor3)})
            }
       })
   })
