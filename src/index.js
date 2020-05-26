@@ -8,6 +8,7 @@ const {MongoClient,ObjectID}=require('mongodb')
 const destination=require('./utils/model')
 const geocode=require('./utils/geocode')
 const forecast=require('./utils/forecast')
+const jsonUtils=require('./utils/utils_json')
 
 const connectURL='mongodb://127.0.0.1:27017'
 const dbname='safar-api'
@@ -91,7 +92,7 @@ app.get('/rainy', (req, res) => {
      if(toGo2.length==0){
       res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:`No such destinations`})
      } else {
-      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2,coor2})//added coor2 array to store coordinates
+      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2,"coor2":jsonUtils.encodeJSON(coor2) })//added coor2 array to store coordinates
      }
     })
     

@@ -154,10 +154,33 @@
         </div>
 
         </footer>
-        <script src="js\script.js" ></script>
-        <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpNIAovfwk8ku78E7bKGA5XlLPlKdaJfI&callback=initMap">
-        </script>
+    <script>
+
+    function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 3,
+      center: {lat: 34.0479, lng: 100.6197}
+    });
+
+    // Create an array of alphabetical characters used to label the markers.
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var markers = locations.map(function(location, i){
+      return new google.maps.Marker({
+        position: location,
+        label: labels[i % labels.length]
+      });
+    });
+
+    // Add a marker clusterer to manage the markers.
+    var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+  }
+    var locations=JSON.parse(decodeURI("{{coor2}}"));
+    console.log(locations)
+    </script>
+    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpNIAovfwk8ku78E7bKGA5XlLPlKdaJfI&callback=initMap">
+    </script>
         
     </body>
 
