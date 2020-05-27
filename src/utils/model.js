@@ -38,6 +38,16 @@ const destination=mongoose.model('locations',{
                 throw new Error("Should be positive!")
             }
         }
+    },
+    latitude:{
+        type:Number,
+        trim:true,
+        required:true,
+    },
+    longitude:{
+        type:Number,
+        trim:true,
+        required:true,       
     }
 
 })

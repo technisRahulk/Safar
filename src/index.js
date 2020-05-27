@@ -50,7 +50,9 @@ app.get('/update', (req, res) => {
               place: place_name,
               temperature: forecastData.temp,
               precipitation: forecastData.precipitation,
-              population:population
+              population:population,
+              latitude:latitude,
+              longitude:longitude
             })
           })
         })
@@ -65,36 +67,45 @@ app.get('/rainy', (req, res) => {
     }
     const db=client.db(dbname)
     var toGo2=[]
+    var coor2=[]
     db.collection('locations').find().forEach((loc)=>{
       if(loc.precipitation>0){
         var map = 'http://maps.google.com/?q='+loc.place
-        var m = {
+        var m ={
           place: loc.place,
           precipitation: loc.precipitation,
           temp: loc.temperature,
-          maplink: map
+          maplink: map,
+          lat:loc.latitude,
+          lng:loc.longitude
+        }
+        var l={
+          lat:loc.latitude,
+          lng:loc.longitude
         }
         toGo2.push(m)
+        coor2.push(l)//pushing coordinates to the array
       }
   
     }).then(()=>{
      if(toGo2.length==0){
       res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:`No such destinations`})
      } else {
-      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2})
+      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2,coor2})//added coor2 array to store coordinates
      }
     })
     
   })
 })
 
-app.get('/warm', (req, res) => {
+app.get('/warm',(req, res) => {
   MongoClient.connect(connectURL, {useNewUrlParser:true},(error,client) => {
     if(error){
       return res.send('Cannot connect to database')
     }
     const db=client.db(dbname)
     var toGo=[]
+    var coor=[]
     //for warm places
     db.collection('locations').find().forEach((loc)=>{
      if(loc.temperature>25){
@@ -104,7 +115,9 @@ app.get('/warm', (req, res) => {
          place: loc.place,
          precipitation: loc.precipitation,
          temp: loc.temperature,
-         maplink: map
+         maplink: map,
+         lat: loc.latitude,
+         lng: loc.longitude
        }
         toGo.push(m)
      }
@@ -127,6 +140,7 @@ app.get('/cold', (req, res) => {
     const db=client.db(dbname)
     //for cold places
     var toGo1=[]
+    var coor1=[]
     db.collection('locations').find().forEach((loc)=>{
       if(loc.temperature<25){
         var map = 'http://maps.google.com/?q='+loc.place
@@ -134,7 +148,9 @@ app.get('/cold', (req, res) => {
           place: loc.place,
           precipitation: loc.precipitation,
           temp: loc.temperature,
-          maplink: map
+          maplink: map,
+          lat: loc.latitude,
+         lng: loc.longitude
         }
         toGo1.push(m)
       }
@@ -166,8 +182,8 @@ app.post('/search',(req,res)=>{
       }
       forecast(latitude,longitude,(error,forecastData)=>{
           if(error){
-              return res.send({error})
-           }
+            return res.send({error})
+          }
           var map = 'http://maps.google.com/?q='+address
           var m = {
             place:address,
@@ -175,6 +191,21 @@ app.post('/search',(req,res)=>{
             temp: forecastData.temp,
             maplink: map
           }
+          var m1 = {
+            place: address,
+            precipitation: forecastData.precipitation,
+            temp: forecastData.temp
+          }
+          MongoClient.connect(connectURL,{useNewUrlParser:true},(error,client)=>{
+            if(error){
+              return res.send('Cannot connect to database')
+            }
+            const db=client.db(dbname)
+            db.collection('locations').insertOne(m1, function(err, res){
+              if (err) throw err
+              console.log("Document inserted")
+            })
+          })
           toGo3.push(m)
           if(toGo3.length==0){
             res.render('index', {success: ``,Places:`No such destinations`})
