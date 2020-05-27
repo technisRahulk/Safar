@@ -151,24 +151,35 @@
     <script>
 
     function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 3,
-      center: {lat: 34.0479, lng: 100.6197}
-    });
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 3,
+            center: {lat: 34.0479, lng: 100.6197}
+        });
 
-    // Create an array of alphabetical characters used to label the markers.
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var markers = locations.map(function(location, i){
-      return new google.maps.Marker({
-        position: location,
-        label: labels[i % labels.length]
-      });
-    });
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var markers = locations.map(function(location, i){
+            return new google.maps.Marker({
+                position: location,
+                animation: google.maps.Animation.DROP,
+                map: map,
+                label: labels[i % labels.length]
+            });
+        });
+        var len = markers.length
+        console.log(len)
+        for(var i=0; i<3; i++){
+            markers[i].addListener('click', function() {
+            map.setZoom(8);
+            map.setCenter(markers[i].getPosition());
+        });
+        }
 
-    // Add a marker clusterer to manage the markers.
-    var markerCluster = new MarkerClusterer(map, markers,
-     {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
+
     var locations=JSON.parse(decodeURI("{{coor}}"));
     </script>
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
