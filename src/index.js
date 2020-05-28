@@ -82,7 +82,8 @@ app.get('/rainy', (req, res) => {
         }
         var l={
           lat:loc.longitude,
-          lng:loc.latitude
+          lng:loc.latitude,
+          name: loc.place
         }
         toGo2.push(m)
         coor2.push(l)//pushing coordinates to the array
@@ -122,7 +123,8 @@ app.get('/warm',(req, res) => {
        }
        var l={
         lat:loc.longitude,
-        lng:loc.latitude
+        lng:loc.latitude,
+        name: loc.place
       }
         toGo.push(m)
         coor3.push(l)
@@ -160,7 +162,8 @@ app.get('/cold', (req, res) => {
         }
         var l={
           lat:loc.longitude,
-          lng:loc.latitude
+          lng:loc.latitude,
+          name: loc.place
         }
         toGo1.push(m)
         coor1.push(l)
