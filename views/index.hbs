@@ -166,15 +166,14 @@
                 label: labels[i % labels.length]
             });
         });
-        var len = markers.length
-        console.log(len)
-        for(var i=0; i<3; i++){
-            markers[i].addListener('click', function() {
+        //var len = markers.length
+        //console.log(len)
+        for(var i=0; i<markers.length; i++){
+            markers[i].addListener('click', function(i) {
             map.setZoom(8);
             map.setCenter(markers[i].getPosition());
-        });
+            });
         }
-
         // Add a marker clusterer to manage the markers.
         var markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
