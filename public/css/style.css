@@ -54,7 +54,10 @@ hr {
 } */
 
 #placename{
-    /* width: 100px;
-    height: 100px; */
     color: black;
+    text-align: center;
+}
+#message{
+    font-weight: 1000;
+    font-size: 15px;
 }

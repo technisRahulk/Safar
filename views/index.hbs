@@ -153,38 +153,51 @@
 
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 2,
+            zoom: 3,
             center: {lat:34.0479, lng: 100.6197}
         });
 
         // Create an array of alphabetical characters used to label the markers.
         var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        var markers = locations.map(function(location, i){
-            return new google.maps.Marker({
-                position: location,
+        var markerCluster = new MarkerClusterer(map, marker,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        for (var i = 0; i < locations.length; ++i){
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: locations[i].lat,
+                    lng: locations[i].lng
+                },
                 animation: google.maps.Animation.DROP,
                 map: map,
-                label: labels[i % labels.length],
-                name: location.name
-            });
-        });
-        //var len = markers.length
-        //console.log(len)
-        for(var i=0; i<markers.length; i++){
-            alert(markers[i].name)
-            var contentString = '<div id="placename">'+markers[i].name+'</div>';
-            var infowindow = new google.maps.InfoWindow({
-                content: contentString
-            });
-            google.maps.event.addListener(markers[i],'click',function(i) {
-                map.panTo(this.getPosition());
+                label: labels[i % labels.length]
+            })
+            attachSecretMessage(marker, locations[i].name);
+            markerCluster.addMarker(marker);
+            google.maps.event.addListener(marker,'click',function() {
+                map.setCenter(this.getPosition());
                 map.setZoom(9);
-                infowindow.open(map, this);
             });
         }
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    }
+
+    function attachSecretMessage(marker, location) {
+        var contentString = 
+        '<div id="placename">'+
+        '<h2>'+
+        location+
+        '</h2 id="placehead">'+
+        '<p id="message">'+
+        'is waiting for you to visit!'+
+        '</p>'
+        '</div>';
+                            
+        var infowindow = new google.maps.InfoWindow({
+        content: contentString
+        });
+
+        marker.addListener('click', function() {
+            infowindow.open(marker.get('map'), marker);
+        });
     }
 
     var locations=JSON.parse(decodeURI("{{coor}}"));
