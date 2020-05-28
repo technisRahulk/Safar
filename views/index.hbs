@@ -171,7 +171,8 @@
         //var len = markers.length
         //console.log(len)
         for(var i=0; i<markers.length; i++){
-            var contentString = '<div id="placename">'+markers[i].position+'</div>';
+            alert(markers[i].name)
+            var contentString = '<div id="placename">'+markers[i].name+'</div>';
             var infowindow = new google.maps.InfoWindow({
                 content: contentString
             });
