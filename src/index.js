@@ -11,7 +11,7 @@ const forecast=require('./utils/forecast')
 const jsonUtils=require('./utils/utils_json')
 
 const connectURL=process.env.DB
-const dbname='test'
+const dbname='safar-api'
 
 const app = express()
 const port=process.env.PORT
