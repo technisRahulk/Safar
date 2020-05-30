@@ -10,7 +10,7 @@ const dbname='safar-api'
        return console.log('error')
       }
     const db=client.db(dbname)
-        db.collection('locations').insertOne({place:'kanyakumari'}, (error, loc) => {
+        db.collection('locations').insertOne({place:'Agra'}, (error, loc) => {
           if(error){
             return console.log(error)
           }
