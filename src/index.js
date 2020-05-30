@@ -10,10 +10,12 @@ const geocode=require('./utils/geocode')
 const forecast=require('./utils/forecast')
 const jsonUtils=require('./utils/utils_json')
 
-const connectURL='mongodb://127.0.0.1:27017'
+const connectURL=process.env.DB
 const dbname='safar-api'
 
 const app = express()
+const port=process.env.PORT
+
 const publicDir=path.join(__dirname,'./../public')
 app.set('views', path.join(__dirname, './../views'));
 app.set('view engine', 'hbs');
@@ -242,6 +244,10 @@ app.get('/', (req, res) => {
     res.render('index', { layout:false,success: ``,Places:``,error:``});
 });
 
+app.get('/api', (req, res) => {
+  const key = process.env.GOOGLE_API_KEY;
+  res.send({key})
+});
 app.get('*',(req,res)=>{
   res.send({
       title:'404',
@@ -249,4 +255,4 @@ app.get('*',(req,res)=>{
   })
 })
 
-app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
+app.listen(port, () => console.log("Server is running on port "+port));

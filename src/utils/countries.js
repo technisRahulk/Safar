@@ -4,7 +4,7 @@ const geocode=require('./geocode')
 const forecast=require('./forecast')
 const cities=require('all-the-cities')
 
-const connectURL='mongodb://127.0.0.1:27017'
+const connectURL=process.env.DB
 const dbname='safar-api'
  MongoClient.connect(connectURL,{useNewUrlParser:true},(error,client)=>{
    if(error){

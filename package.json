@@ -4,7 +4,8 @@
   "main": "countries.js",
   "scripts": {
     "start": "node src/index.js",
-    "database":"G:/mongodb/bin/mongod.exe --dbpath=G:/mongodb-data",
+    "dev": "env-cmd ./config/dev.env nodemon src/index.js",
+    "database": "G:/mongodb/bin/mongod.exe --dbpath=G:/mongodb-data",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,7 +23,10 @@
     "request": "^2.88.2",
     "validator": "^13.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "env-cmd": "^8.0.2",
+    "nodemon": "^2.0.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/technisRahulk/Safar.git"

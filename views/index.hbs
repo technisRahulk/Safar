@@ -88,7 +88,7 @@
             <ul >
                 {{#each Places}}
             <a href="https://www.google.com/maps/search/?api=1&query={{this.place}}" target="_blank">
-                <button type="button" class="btn btn-primary btn-lg" style="padding: 0.5em 3em 0.5em 3em;text-align:center;margin:0.1em 0.1cem 0.4em;">
+                <button type="button" class="btn btn-primary btn-lg" style="padding: 0.5em 3em 0.5em 3em;text-align:center;margin:0.1em 0.1em 0.4em;">
                     {{this.place}}
                 </button>
             </a>
@@ -201,11 +201,19 @@
     }
 
     var locations=JSON.parse(decodeURI("{{coor}}"));
-    </script>
+    var key=''
+    fetch('/api').then((response)=>{
+            response.json().then((data)=>{
+               key=data
+            })
+        })
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key='+key+'&callback=initMap';
+    document.body.appendChild(script);
+    </script>  
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpNIAovfwk8ku78E7bKGA5XlLPlKdaJfI&callback=initMap">
     </script>
-        
     </body>
 
 </html>
