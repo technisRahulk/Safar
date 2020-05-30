@@ -240,14 +240,16 @@ app.post('/search',(req,res)=>{
       })
   })
 })
-app.get('/', (req, res) => {
-    res.render('index', { layout:false,success: ``,Places:``,error:``});
-});
 
 app.get('/api', (req, res) => {
   const key = process.env.GOOGLE_API_KEY;
   res.send({key})
 });
+app.get('/', (req, res) => {
+    res.render('index', { layout:false,success: ``,Places:``,error:``});
+});
+
+
 app.get('*',(req,res)=>{
   res.send({
       title:'404',

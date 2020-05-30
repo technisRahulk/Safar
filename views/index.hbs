@@ -201,16 +201,16 @@
     }
 
     var locations=JSON.parse(decodeURI("{{coor}}"));
-    var key=''
+    
     fetch('/api').then((response)=>{
-            response.json().then((data)=>{
-               key=data
-            })
+        response.json().then((data)=>{
+            //console.log(data.key)
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://maps.googleapis.com/maps/api/js?key='+data.key+'&callback=initMap';
+            document.body.appendChild(script);
         })
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://maps.googleapis.com/maps/api/js?key='+key+'&callback=initMap';
-    document.body.appendChild(script);
+    })
     </script>  
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
     </script>
