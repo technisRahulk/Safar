@@ -200,15 +200,11 @@
         });
     }
 
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key='+JSON.parse(decodeURI("{{key}}"))+'&callback=initMap';
+    document.body.appendChild(script);
    
-    fetch('/api').then((response)=>{
-        response.json().then((data)=>{
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://maps.googleapis.com/maps/api/js?key='+data.key+'&callback=initMap';
-            document.body.appendChild(script);
-        })
-    }) 
     var locations=JSON.parse(decodeURI("{{coor}}"))
     </script>  
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
