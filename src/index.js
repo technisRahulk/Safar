@@ -11,6 +11,7 @@ const forecast=require('./utils/forecast')
 const jsonUtils=require('./utils/utils_json')
 
 const connectURL=process.env.DB
+const key = process.env.GOOGLE_API_KEY;
 const dbname='safar-api'
 
 const app = express()
@@ -95,7 +96,7 @@ app.get('/rainy', (req, res) => {
      if(toGo2.length==0){
       res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:`No such destinations`})
      } else {
-      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2,"coor":jsonUtils.encodeJSON(coor2) })//added coor2 array to store coordinates
+      res.render('index', {success: `Here are the Rainy Places you would love to visit!`,Places:toGo2,"coor":jsonUtils.encodeJSON(coor2),"key":jsonUtils.encodeJSON(key)})//added coor2 array to store coordinates
      }
     })
     
@@ -135,7 +136,7 @@ app.get('/warm',(req, res) => {
       if(toGo.length==0){
         res.render('index', {success: `Here are the Warm Places you would love to visit!`,Places:`No such destinations`})
       } else {
-        res.render('index', {success: `Here are the Warm Places you would love to visit!`,Places:toGo,"coor":jsonUtils.encodeJSON(coor3)})
+        res.render('index', {success: `Here are the Warm Places you would love to visit!`,Places:toGo,"coor":jsonUtils.encodeJSON(coor3),"key":jsonUtils.encodeJSON(key)})
       }
     })
     
@@ -175,16 +176,12 @@ app.get('/cold', (req, res) => {
       if(toGo1.length==0){
         res.render('index', {success: `Here are the Cold Places you would love to visit!`,Places:`No such destinations`})
       } else {
-        res.render('index', {success: `Here are the Cold Places you would love to visit!`,Places:toGo1,"coor":jsonUtils.encodeJSON(coor1)})
+        res.render('index', {success: `Here are the Cold Places you would love to visit!`,Places:toGo1,"coor":jsonUtils.encodeJSON(coor1),"key":jsonUtils.encodeJSON(key)})
       }
     })
     
   })
 })
-
-// app.post('/search', (req, res) => {
-//   console.log(req.body.age)
-// })
 
 app.post('/search',(req,res)=>{
   var address=req.body.name
@@ -235,16 +232,12 @@ app.post('/search',(req,res)=>{
           if(toGo3.length==0){
             res.render('index', {success: ``,Places:`No such destinations`})
            } else {
-            res.render('index', {success: `Here is the Place you would love to visit!!`,Places:toGo3,"coor":jsonUtils.encodeJSON(coor3)})
+            res.render('index', {success: `Here is the Place you would love to visit!!`,Places:toGo3,"coor":jsonUtils.encodeJSON(coor3),"key":jsonUtils.encodeJSON(key)})
            }
       })
   })
 })
 
-app.get('/api', (req, res) => {
-  const key = process.env.GOOGLE_API_KEY;
-  res.send({key})
-});
 app.get('/', (req, res) => {
     res.render('index', { layout:false,success: ``,Places:``,error:``});
 });
