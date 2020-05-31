@@ -19,26 +19,22 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"> <span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <form action="/update">
-                            <input type="submit" value="Update" placeholder="Update" class="btn btn-success">
-                        </form>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
                 </ul>
                 <form name="form1" method="post" action="/search" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" name="name" required>
-                <button class="btn btn-secondary my-2 my-sm-0" id="submit" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" name="name" required>
+                    <button class="btn btn-secondary my-2 my-sm-0" id="submit" type="submit">Search</button>
                 </form>
             </div>
             </nav>
@@ -88,8 +84,10 @@
             <ul >
                 {{#each Places}}
             <a href="https://www.google.com/maps/search/?api=1&query={{this.place}}" target="_blank">
-                <button type="button" class="btn btn-primary btn-lg" style="padding: 0.5em 3em 0.5em 3em;text-align:center;margin:0.1em 0.1cem 0.4em;">
+                <button id="place" type="button" class="btn btn-primary btn-lg" style="padding: 0.5em 3em 0.5em 3em;text-align:center;margin:0.1em 0.1cem 0.4em;">
                     {{this.place}}
+                    <hr>
+                    {{this.temp}}°C
                 </button>
             </a>
                     {{!-- Temperature: {{this.temp}} <br>
@@ -204,8 +202,7 @@
     </script>
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpNIAovfwk8ku78E7bKGA5XlLPlKdaJfI&callback=initMap">
-    </script>
-        
+    </script>  
     </body>
 
 </html>
