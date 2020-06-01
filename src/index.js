@@ -73,7 +73,7 @@ app.get('/rainy', (req, res) => {
     var toGo2=[]
     var coor2=[]
     db.collection('locations').find().forEach((loc)=>{
-      if(loc.precipitation>0){
+      if(loc.precipitation>0.2){
         var map = 'http://maps.google.com/?q='+loc.place
         var m ={
           place: loc.place,
@@ -153,7 +153,7 @@ app.get('/cold', (req, res) => {
     var toGo1=[]
     var coor1=[]
     db.collection('locations').find().forEach((loc)=>{
-      if(loc.temperature<25){
+      if(loc.temperature<19){
         var map = 'http://maps.google.com/?q='+loc.place
         var m = {
           place: loc.place,
