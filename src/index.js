@@ -217,16 +217,17 @@ app.post('/search',(req,res)=>{
             precipitation: forecastData.precipitation,
             temp: forecastData.temp
           }
-          MongoClient.connect(connectURL,{useNewUrlParser:true},(error,client)=>{
-            if(error){
-              return res.send('Cannot connect to database')
-            }
-            const db=client.db(dbname)
-            db.collection('locations').insertOne(m1, function(err, res){
-              if (err) throw err
-              console.log("Document inserted")
-            })
-          })
+          //insertion of a place on searching
+          // MongoClient.connect(connectURL,{useNewUrlParser:true},(error,client)=>{
+          //   if(error){
+          //     return res.send('Cannot connect to database')
+          //   }
+          //   const db=client.db(dbname)
+          //   db.collection('locations').insertOne(m1, function(err, res){
+          //     if (err) throw err
+          //     console.log("Document inserted")
+          //   })
+          // })
           toGo3.push(m)
           coor3.push(l)
           if(toGo3.length==0){
