@@ -61,7 +61,7 @@ app.get('/update', (req, res) => {
           })
         })
       })
-      res.render('index', {success: `Updated Successfully`,Places:``})
+      res.render('index', {success: `Updated Successfully`,Places:``,"key":jsonUtils.encodeJSON(key)})
     }) 
 })
 app.get('/rainy', (req, res) => {
@@ -240,7 +240,7 @@ app.post('/search',(req,res)=>{
 })
 
 app.get('/', (req, res) => {
-    res.render('index', { layout:false,success: ``,Places:``,error:``});
+    res.render('index', { layout:false,success: ``,Places:``,error:``,"key":jsonUtils.encodeJSON(key)});
 });
 
 
