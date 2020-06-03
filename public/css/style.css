@@ -69,9 +69,31 @@ hr {
     #search-form{
         float: right;
         margin-right: 10px;
-        transform: translateY(-180px);
+        transform: translateY(-200px);
     }
     #top-nav{
         height: 120px;
+    }
+    #update-submit{
+        transform: translateY(-55px);
+    }
+    #safar{
+        transform: translateX(-20px);
+    }
+}
+@media screen and (max-width: 474px){
+    #safar{
+        font-size: 20px;
+    }
+    #search-form{
+        transform: translateY(-180px);
+    }
+    #search{
+        width: 150px;
+    }
+}
+@media screen and (max-width: 374px){
+    #search{
+        width: 100px;
     }
 }
