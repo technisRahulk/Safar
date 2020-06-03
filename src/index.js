@@ -113,7 +113,7 @@ app.get('/warm',(req, res) => {
     var coor3=[]
     //for warm places
     db.collection('locations').find().forEach((loc)=>{
-     if(loc.temperature>25){
+     if(loc.temperature>28){
        var map = 'http://maps.google.com/?q='+loc.place
       //  console.log(map)
        var m = {

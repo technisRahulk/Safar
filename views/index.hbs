@@ -90,8 +90,6 @@
             <a href="https://www.google.com/maps/search/?api=1&query={{this.place}}" target="_blank">
                 <button id="place" type="button" class="btn btn-primary btn-lg" style="padding: 0.5em 3em 0.5em 3em;text-align:center;margin:0.1em 0.1cem 0.4em;">
                     {{this.place}}
-                    <hr>
-                    {{this.temp}}°C
                 </button>
             </a>
                     {{!-- Temperature: {{this.temp}} <br>
@@ -125,11 +123,11 @@
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
                 Rahul Kumar Gupta
-                <a href="https://github.com/technisRahulk" target="_blank"><i class="fab fa-linkedin mr-3 devs"></i></a> <a href="https://www.linkedin.com/in/rahul-kumar-gupta-092663176" target="_blank"><i class="fab fa-github mr-3 devs"></i></a>
+                <a href="https://www.linkedin.com/in/rahul-kumar-gupta-092663176" target="_blank"><i class="fab fa-linkedin mr-3 devs"></i></a> <a href="https://github.com/technisRahulk" target="_blank"><i class="fab fa-github mr-3 devs"></i></a>
                 </p>
                 <p>
                 Anuva Bhattacharjee
-                <a href="https://github.com/anuva04" target="_blank"><i class="fab fa-linkedin mr-3 devs"></i></a> <a href="https://www.linkedin.com/in/anuva-bhattacharjee-2923b5170" target="_blank"><i class="fab fa-github mr-3 devs"></i></a>
+                <a href="https://www.linkedin.com/in/anuva-bhattacharjee-2923b5170" target="_blank"><i class="fab fa-linkedin mr-3 devs"></i></a> <a href="https://github.com/anuva04" target="_blank"><i class="fab fa-github mr-3 devs"></i></a>
                 </p>
 
             </div>
@@ -155,7 +153,7 @@
 
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 3,
+            zoom: 2,
             center: {lat:34.0479, lng: 100.6197}
         });
 
