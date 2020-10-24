@@ -3,6 +3,7 @@
 ## ABOUT
 > This is a website for letting users choose tourist destination according to their preference of weather. Once the user chooses a particular weather he/she wants, real-time weather report will be fetched for all available locations and the ones matching the user's preferences will be displayed. User can click on any place he likes and a Google Map of that particular location will be displayed.
 > Also user can type in the name of any place he/she wishes to visit in the search bar.
+>This works because we have included an update button which eventually updates the temperature and other parameters by calling an API, which makes everything appear the way it is now currently.
 
 ## TECH STACK
 * HTML, CSS, JavaScript (frontend)
