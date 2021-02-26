@@ -1,7 +1,11 @@
 const mongoose=require('mongoose')
 const validator=require('validator')
 
-mongoose.connect(process.env.DB+'/safar-api',{
+// mongoose.connect(process.env.DB+'/safar-api',{
+//     useNewUrlParser:true,
+//     useCreateIndex:true
+// })
+mongoose.connect('mongodb+srv://safarproject2020:rahulkumaru2020@cluster0-wgzam.mongodb.net/safar-api?retryWrites=true/safar-api',{
     useNewUrlParser:true,
     useCreateIndex:true
 })

@@ -9,13 +9,15 @@ const geocode=require('./utils/geocode')
 const forecast=require('./utils/forecast')
 const jsonUtils=require('./utils/utils_json')
 require("dotenv").config();
-const connectURL=process.env.DB
-console.log(connectURL)
-const key = process.env.GOOGLE_API_KEY;
+// const connectURL=process.env.DB
+// const key = process.env.GOOGLE_API_KEY;
+const connectURL="mongodb+srv://safarproject2020:rahulkumaru2020@cluster0-wgzam.mongodb.net/safar-api?retryWrites=true"
+const key = "AIzaSyDpNIAovfwk8ku78E7bKGA5XlLPlKdaJfI"
 const dbname='safar-api'
 
 const app = express()
-const port=process.env.PORT|5000
+// const port=process.env.PORT|5000
+const port=3001
 
 const publicDir=path.join(__dirname,'./../public')
 app.set('views', path.join(__dirname, './../views'));
