@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Safar
+        </title>
+        <link rel="stylesheet" type="text/css" href="css\bootstrap-dark.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+        <link rel="stylesheet" type="text/css" href="css\style.css">
+    </head>
+    <body>
+        <div class="login-box container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top-nav">
+            <a class="navbar-brand" href="#"><h1 style="padding-left: 20px;" id="safar">SAFAR</h1></a>
+            {{!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button> --}}
+            <div class="navbar-collapse collapse show" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"> <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <form name="form1" method="get" action="/update" class="form-inline my-2 my-lg-0">
+                                <button class="btn btn-success my-2 my-sm-0" id="update-submit" type="submit">Update</button>
+                            </form>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                </ul>
+                <form name="form1" method="post" action="/search" class="form-inline my-2 my-lg-0" id="search-form">
+                    <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" name="name" required>
+                    <button class="btn btn-secondary my-2 my-sm-0" id="submit" type="submit">Search</button>
+                </form>
+            </div>
+            </nav>
+            <div class="jumbotron">
+                <div class="textbox1">
+                    <h3>Which kind of Destination??</h3>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                            <img style="height: 200px; width: 100%; display: block;" src="/images/rainy.jpeg" alt="Card image">
+                            <div class="card-header">
+                                <form action="/rainy">
+                                    <input type="submit" value="RAINY" placeholder="RAINY" class="btn btn-info btn-lg btn-block place-btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                            <img style="height: 200px; width: 100%; display: block;" src="/images/cold.jpg" alt="Card image">
+                            <div class="card-header">
+                                <form action="/cold">
+                                    <input type="submit" value="COLD" placeholder="COLD" class="btn btn-primary btn-lg btn-block place-btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card text-white bg-warning mb-3" style="max-width: 20rem;">
+                            <img style="height: 200px; width: 100%; display: block;" src="/images/hot.jpg" alt="Card image">
+                            <div class="card-header">
+                                <form action="/warm">
+                                    <input type="submit" value="WARM" placeholder="WARM" class="btn btn-warning btn-lg btn-block place-btn">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-dismissible alert-success">
+                
+                {{success}}
+            </div>
+            <br>
+            <ul >
+                {{#each Places}}
+            <a href="https://www.google.com/maps/search/?api=1&query={{this.place}}" target="_blank">
+                <button id="place" type="button" class="btn btn-primary btn-lg" style="padding: 0.5em 3em 0.5em 3em;text-align:center;margin:0.1em 0.1cem 0.4em;">
+                    {{this.place}}
+                </button>
+            </a>
+                    {{!-- Temperature: {{this.temp}} <br>
+                    Precipitation: {{this.precipitation}} <br>
+                    Latitude:{{this.lat}}<br>
+                    Longitude:{{this.lng}}<br>
+                    <a href="{{this.maplink}}" target="_blank">Go To Map</a> --}}
+                {{/each}}
+                <p>{{error}}</p>
+            </ul>
+        </div>
+        {{!-- For Rendering Map --}}
+        <div id="map"></div>
+        <hr>
+        <footer class="page-footer font-small unique-color-dark">
+
+        <div class="container text-center text-md-left mt-5">
+
+            <div class="row mt-3">
+
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                <h6 class="text-uppercase font-weight-bold">About Us</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Safar is a tourist destination website to give suggestions about the perfect places around the world for you to visit!</p>
+
+            </div>
+            <div class="col-md-3 col-lg-2 col-xl-4 mx-auto mb-4">
+
+                <h6 class="text-uppercase font-weight-bold">Developers</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                Rahul Kumar Gupta
+                <a href="https://www.linkedin.com/in/rahul-kumar-gupta-092663176" target="_blank"><i class="fab fa-linkedin mr-3 devs"></i></a> <a href="https://github.com/technisRahulk" target="_blank"><i class="fab fa-github mr-3 devs"></i></a>
+                </p>
+                <p>
+                Anuva Bhattacharjee
+                <a href="https://www.linkedin.com/in/anuva-bhattacharjee-2923b5170" target="_blank"><i class="fab fa-linkedin mr-3 devs"></i></a> <a href="https://github.com/anuva04" target="_blank"><i class="fab fa-github mr-3 devs"></i></a>
+                </p>
+
+            </div>
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                <h6 class="text-uppercase font-weight-bold">Contact Us at</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                <i class="fas fa-envelope mr-3"></i> safarproject2020@gmail.com</p>
+                <p>
+
+            </div>
+
+            </div>
+
+        </div>
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="#"> #AaramSeTeam</a>
+        </div>
+
+        </footer>
+    <script>
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 2,
+            center: {lat:34.0479, lng: 100.6197}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var markerCluster = new MarkerClusterer(map, marker,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        for (var i = 0; i < locations.length; ++i){
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: locations[i].lat,
+                    lng: locations[i].lng
+                },
+                animation: google.maps.Animation.DROP,
+                map: map,
+                label: labels[i % labels.length]
+            })
+            attachSecretMessage(marker, locations[i].name);
+            markerCluster.addMarker(marker);
+            google.maps.event.addListener(marker,'click',function() {
+                map.setCenter(this.getPosition());
+                map.setZoom(9);
+            });
+        }
+    }
+
+    function attachSecretMessage(marker, location) {
+        var contentString = 
+        '<div id="placename">'+
+        '<h2>'+
+        location+
+        '</h2 id="placehead">'+
+        '<p id="message">'+
+        'is waiting for you to visit!'+
+        '</p>'
+        '</div>';
+                            
+        var infowindow = new google.maps.InfoWindow({
+        content: contentString
+        });
+
+        marker.addListener('click', function() {
+            infowindow.open(marker.get('map'), marker);
+        });
+    }
+
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key='+JSON.parse(decodeURI("{{key}}"))+'&callback=initMap';
+    document.body.appendChild(script);
+   
+    var locations=JSON.parse(decodeURI("{{coor}}"))
+    </script>  
+    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+    </script>
+    </body>
+
+</html>

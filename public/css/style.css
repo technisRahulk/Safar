@@ -1,0 +1,99 @@
+#map {
+    left:10%;
+    border-radius: 1%;
+    height: 70%;
+    width: 80%;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.textbox1 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.place-btn {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.alert{
+    font-size: 25px;
+    text-align: center;
+}
+#myModal{
+    display:none;
+    background-color: red;
+    position: absolute;
+    top: 50vh;
+    height: 30%;
+    width: 90%;
+}
+#sticky-footer {
+    flex-shrink: none;
+}
+hr {
+    color: aliceblue;
+    height: 1px;
+    width: 80%;
+}
+.devs {
+    margin-left: 15px;
+    font-size: large;
+    background: white;
+    border-radius: 50%;
+    padding: 7px;
+    color: black;
+}
+/* #map {
+    width: 80%;
+    margin: auto;
+} */
+
+#placename{
+    color: black;
+    text-align: center;
+}
+#message{
+    font-weight: 1000;
+    font-size: 15px;
+}
+#place{
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+@media screen and (max-width: 990px){
+    #search-form{
+        float: right;
+        margin-right: 10px;
+        transform: translateY(-200px);
+    }
+    #top-nav{
+        height: 120px;
+    }
+    #update-submit{
+        transform: translateY(-35px);
+    }
+    #safar{
+        transform: translateX(-20px);
+    }
+}
+@media screen and (max-width: 474px){
+    #safar{
+        font-size: 20px;
+    }
+    #search-form{
+        transform: translateY(-180px);
+    }
+    #search{
+        width: 150px;
+    }
+}
+@media screen and (max-width: 374px){
+    #search{
+        width: 100px;
+    }
+}
